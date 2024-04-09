@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+       
+        function calculateInterest(){
+            const principal = parseFloat(document.getElementById('principal').value);
+    const rate = parseFloat(document.getElementById('rate').value) / 100; // Convert percentage to decimal
+    const time = parseInt(document.getElementById('time').value);
+    const compounding = parseInt(document.getElementById('compounding').value);
+
+    const n = compounding;
+    const t = time; 
+
+    const amount = principal * Math.pow(1 + (rate / n), n * t);
+
+    const resultElement = document.getElementById('result');
+    resultElement.innerHTML = `
+        <p>Principal Amount: ${principal.toFixed(2)}</p>
+        <p>Annual Interest Rate: ${rate * 100}%</p>
+        <p>Time Period: ${time} years</p>
+        <p>Compounding Frequency: ${n} times per year</p>
+        <h3>Compound Interest:</h3>
+        <p>Final Amount: ${amount.toFixed(2)}</p>
+    `;
+        }
+    </script>
+</head>
+<body>
+    <h1>Calculating Compound Interest</h1>
+    <form id="formHandling">
+      <label for="principak">Principal Amount:</label>
+      <input type="number" id="principal" required><br><br>
+
+      <label for="rate">Annual Interest Rate (%):</label>
+      <input type="number" id="rate" step="0.01" required><br><br>
+
+      <label for="time">Time Period (years):</label>
+      <input type="number" id="time" required><br><br>
+
+      <label for="compounding">Compounding Frequency:</label>
+      <select id="compounding">
+          <option value="1">Annually</option>
+          <option value="2">Semi-Annually</option>
+          <option value="4">Quarterly</option>
+          <option value="12">Monthly</option>
+      </select><br><br>
+
+      <button type="button" onclick="calculateInterest()">Calculate</button>
+    </form>
+    <div id="result"></div>
+</body>
+</html>
